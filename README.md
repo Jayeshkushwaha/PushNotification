@@ -305,3 +305,8 @@ import messaging from "@react-native-firebase/messaging";
 messaging().setBackgroundMessageHandler(async (remoteMessage) => {
   console.log("Message handled in the background", remoteMessage);
 });
+
+Use This to test
+https://fcm-tester.netlify.app/
+need server key from firebase console
+need token from app console
