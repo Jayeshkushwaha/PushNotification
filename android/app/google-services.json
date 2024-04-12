@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "234927471107",
+    "project_id": "jayesh-572c5",
+    "storage_bucket": "jayesh-572c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234927471107:android:11d592bab7c3f1e44eec36",
+        "android_client_info": {
+          "package_name": "com.projectname"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5DS02huQoadRdNefBP3L4v_anGyghbis"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

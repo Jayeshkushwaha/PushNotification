@@ -1,118 +1,97 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import notifee, { AndroidImportance, AndroidStyle } from "@notifee/react-native";
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+  requestUserPermission,
+  notificationListener,
+} from "./utils/pushnotification_helper";
+const NotificationPlayGround = () => {
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  useEffect(() => {
+    requestUserPermission();
+    notificationListener();
+  }, []);
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [enteredValue, setEnteredValue] = useState("");
+  async function onDisplayNotification() {
+    const channelId = await notifee.createChannel({
+      id: "default",
+      name: "Default Channel",
+    });
+    await notifee.requestPermission();
+    await notifee.displayNotification({
+      id: "123",
+      title: `<p style="color: white;"><b>New message</p></b></p>`,
+      body: enteredValue,
+      android: {
+        importance: AndroidImportance.HIGH,
+        channelId,
+        color: "#6495ed",
+        timestamp: Date.now() - 800, // 8 minutes ago
+        showTimestamp: true,
+        groupSummary: true,
+        groupId: "123",
+        largeIcon: "https://logos.flamingtext.com/City-Logos/Todo-Logo.png",
+      },
+    });
+    // Grouping
+    await notifee.displayNotification({
+      title: `<p style="color: white;"><b>New message</b></p>`,
+      body: enteredValue,
+      android: {
+        channelId,
+        groupId: "123",
+        color: "#6495ed",
+        timestamp: Date.now() - 800, // 8 minutes ago
+        showTimestamp: true,
+        largeIcon: "https://logos.flamingtext.com/City-Logos/Todo-Logo.png",
+        style: {
+          type: AndroidStyle.BIGPICTURE,
+          picture: "https://logos.flamingtext.com/City-Logos/Todo-Logo.png",
+        },
+      },
+    });
+  }
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={styles.body}>
+      <TextInput
+        placeholder="Write something."
+        style={styles.input}
+        onChangeText={(value) => setEnteredValue(value)}
+        value={enteredValue}
+      />
+      <TouchableOpacity style={styles.button} onPress={onDisplayNotification}>
+        <Text style={styles.btn_text}>Create</Text>
+      </TouchableOpacity>
     </View>
   );
-}
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
+};
+export default NotificationPlayGround;
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  body: {
+    flex: 1,
+    backgroundColor: "black",
+    padding: 20,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  input: {
+    width: "100%",
+    backgroundColor: "#323232",
+    height: 150,
+    textAlignVertical: "top",
+    padding: 20,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  button: {
+    width: "100%",
+    backgroundColor: "cornflowerblue",
+    margin: 20,
+    padding: 20,
   },
-  highlight: {
-    fontWeight: '700',
+  btn_text: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 27,
+    textAlign: "center",
   },
-});
-
-export default App;
+})
