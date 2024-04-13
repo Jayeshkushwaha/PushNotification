@@ -1,11 +1,11 @@
-Step 1 :-
+## Step 1 :-
 npx react-native@X.XX.X init AwesomeProject --version X.XX.X
 #npm
 npm install --save @notifee/react-native
-## Yarn
+#Yarn
 yarn add @notifee/react-native
 
-Step 2 :-
+## Step 2 :-
 Main File:-App.js
 import { StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
 import React, { useState } from "react";
@@ -106,13 +106,13 @@ const styles = StyleSheet.create({
   },
 });
 
-Step 3 :-
-## Using npm
+## Step 3 :-
+#Using npm
 npm install --save @react-native-firebase/app @react-native-firebase/messaging
-## Using Yarn
+#Using Yarn
 yarn add @react-native-firebase/app @react-native-firebase/messaging
 
-Step 4 :-
+## Step 4 :-
 Next, you must visit the official Firebase website and navigate to the Firebase console to create a new project Link-https://console.firebase.google.com/. 
 In my case, I named my project ‘PushNotification.’ After creating your project, simply click the notification bell icon to begin creating your notifications.
 Next, you will see a section titled ‘Add Firebase to your Android app,’ a form field. 
@@ -122,7 +122,7 @@ After you’ve filled out the form, click ‘Next,’ and you’ll be prompted t
 Paste this file into the app folder inside your Android folder. 
 Once you’ve completed these steps, you must include the Google SDK in your project by following the steps below.
 
-Step 5 :-
+## Step 5 :-
 Step 1: Navigate to the <project>/build.gradle file and include the following line of code inside the dependencies section.
 
 dependencies {
@@ -136,7 +136,7 @@ dependencies {
         ... other implementations
         implementation platform('com.google.firebase:firebase-bom:32.3.1') // Add this line
 
-Step 6 :-
+## Step 6 :-
 To get started, create a folder named utils; within that folder, create a file named pushnotification_helper.js
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
