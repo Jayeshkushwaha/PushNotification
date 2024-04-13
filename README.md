@@ -221,5 +221,4 @@ messaging().setBackgroundMessageHandler(async (remoteMessage) => {
 ```
 
 ### Step 8. Link - https://fcm-tester.netlify.app/
-Need server key from firebase console
-Need token from app console
+Need server key from firebase console and fcm token from app console.
