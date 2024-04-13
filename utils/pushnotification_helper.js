@@ -37,28 +37,28 @@ export const notificationListener = async () => {
   });
   //   Listen in forgorund
   messaging().onMessage(async (remoteMessage) => {
-    console.log("Reveived on foreground", remoteMessage);
+    console.log("Received on foreground", remoteMessage);
     const channelId = await notifee.createChannel({
-        id: "default",
-        name: "Default Channel",
-      });
+      id: "default",
+      name: "Default Channel",
+    });
     await notifee.displayNotification({
-        title: remoteMessage.notification.title,
-        body: remoteMessage.notification.body,
-        android: {
-          channelId,
-          importance: AndroidImportance.HIGH,
-          groupId: "123",
-          color: "#6495ed",
-          timestamp: Date.now() - 800, // 8 minutes ago
-          showTimestamp: true,
-          largeIcon: remoteMessage.notification.android.imageUrl,
-          style: {
-            type: AndroidStyle.BIGPICTURE,
-            picture: remoteMessage.notification.android.imageUrl,
-          },
+      title: remoteMessage.notification.title,
+      body: remoteMessage.notification.body,
+      android: {
+        channelId,
+        importance: AndroidImportance.HIGH,
+        groupId: "123",
+        color: "#6495ed",
+        timestamp: Date.now() - 800, // 8 minutes ago
+        showTimestamp: true,
+        largeIcon: remoteMessage.notification.android.imageUrl,
+        style: {
+          type: AndroidStyle.BIGPICTURE,
+          picture: remoteMessage.notification.android.imageUrl,
         },
-      });
+      },
+    });
   });
   messaging()
     .getInitialNotification()
