@@ -3,7 +3,6 @@ import messaging from "@react-native-firebase/messaging";
 import notifee, { AndroidImportance, AndroidStyle } from "@notifee/react-native";
 
 export async function requestUserPermission() {
-  // AIzaSyC5DS02huQoadRdNefBP3L4v_anGyghbis
   const authStatus = await messaging().requestPermission();
   const enabled =
     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
