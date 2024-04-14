@@ -95,4 +95,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 })
-// AIzaSyC5DS02huQoadRdNefBP3L4v_anGyghbis
